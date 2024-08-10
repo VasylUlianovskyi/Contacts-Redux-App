@@ -1,0 +1,40 @@
+.contactItem {
+  padding: 1rem;
+  margin: 2rem;
+  box-shadow: 0 0 5px royalblue;
+  border-radius: 0.5rem;
+  transition: transform 0.2s ease-in-out;
+  position: relative;
+}
+
+.contactItem:hover {
+  transform: scale(1.05);
+}
+
+.favouriteBtn {
+  border: none;
+  background-color: transparent;
+  font-size: 2rem;
+  position: absolute;
+  right: 0;
+  top: 0.3rem;
+  cursor: pointer;
+}
+
+.clicked {
+  color: yellow;
+}
+
+.notCliked {
+  color: grey;
+}
+
+.deleteBtn {
+  border: none;
+  background-color: transparent;
+  font-size: 2rem;
+}
+
+.deleteBtn:hover {
+  color: red
+}

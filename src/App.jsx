@@ -1,5 +1,11 @@
+import ContactsPage from "./pages/ContactsPage";
+
 function App() {
-  return <></>;
+  return (
+    <>
+      <ContactsPage />
+    </>
+  );
 }
 
 export default App;
