@@ -5,6 +5,7 @@ const USERS_SLICE_NAME = 'users';
 
 const initialState = {
   users: [],
+  normalizedUsers: {},
   isFetching: false,
   error: null,
 };
@@ -32,6 +33,7 @@ const userSlice = createSlice({
     });
     builder.addCase(getUsersThunk.fulfilled, (state, { payload }) => {
       state.users = payload;
+      state.users.forEach(u => (state.normalizedUsers[u.id] = u));
       state.isFetching = false;
     });
     builder.addCase(getUsersThunk.rejected, (state, { payload }) => {
