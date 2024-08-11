@@ -1,11 +1,17 @@
 import { connect } from 'react-redux';
 import { useEffect } from 'react';
 import { getPostsThunk } from '../../store/slices/postsSlice';
+import { getUsersThunk } from '../../store/slices/userSlice';
 import styles from './PostPage.module.css';
-
-export const PostsPage = ({ posts, isFetching, error, get }) => {
+export const PostsPage = ({
+  postsList: { posts, isFetching, error },
+  usersList: { users },
+  getPosts,
+  getUsers,
+}) => {
   useEffect(() => {
-    get();
+    getPosts();
+    getUsers();
   }, []);
 
   const mapPosts = p => (
@@ -13,7 +19,7 @@ export const PostsPage = ({ posts, isFetching, error, get }) => {
       <article>
         <h2>{p.title}</h2>
         <p>{p.body}</p>
-        <p>Author:{p.userId}</p>
+        <p>Author:{users.find(u => u.id === p.userId)?.name || 'Unknown'}</p>
       </article>
     </li>
   );
@@ -28,10 +34,14 @@ export const PostsPage = ({ posts, isFetching, error, get }) => {
   );
 };
 
-const mapStateToProps = ({ postsList }) => postsList;
+const mapStateToProps = ({ postsList, usersList }) => ({
+  postsList,
+  usersList,
+});
 
 const mapDispatchToProps = dispatch => ({
-  get: () => dispatch(getPostsThunk()),
+  getPosts: () => dispatch(getPostsThunk()),
+  getUsers: () => dispatch(getUsersThunk()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PostsPage);
